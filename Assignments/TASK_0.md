@@ -6,27 +6,80 @@ Compilez et lancez le programme.
 
 Allez dans le fichier `tower_sim.cpp` et recherchez la fonction responsable de gérer les inputs du programme.
 Sur quelle touche faut-il appuyer pour ajouter un avion ?
+
+-- Il faut appuyer sur la touche 'c'.
+
 Comment faire pour quitter le programme ?
+
+-- Il faut utiliser la touche 'x' ou 'q'.
+
 A quoi sert la touche 'F' ?
+
+-- La touche 'F' sert à activer/désactiver le mode plein écran.
 
 Ajoutez un avion à la simulation et attendez.
 Que est le comportement de l'avion ?
+
+-- L'avion va atterrir, effectuer le débarquement de ses passagers, l'embarquement des nouveaux puis décoller. Il fait ça en boucle.
+
 Quelles informations s'affichent dans la console ?
+
+-- La console affiche les différentes action en cours d'un appareil grâce au nom de l'avion.
 
 Ajoutez maintenant quatre avions d'un coup dans la simulation.
 Que fait chacun des avions ?
+
+-- Tous les avions font les mêmes actions, mais attendent de pouvoir faire une action si il n'y a pas de place.
 
 ## B- Analyse du code
 
 Listez les classes du programme à la racine du dossier src/.
 Pour chacune d'entre elle, expliquez ce qu'elle représente et son rôle dans le programme.
 
+-- La liste des classes est:
+- AircraftType : représente un type d'avion. Contient son image et ses différentes rapidité de déplacement.
+- Aircraft : représente un avion. Contient les états d'un avion (position, vitesse...).
+- AirportType : représente un type d'aéroport. Contient les positions des points d'intérêts d'un aéroport et la liste de ses pistes d'atterrisage. 
+- Airport : représente un aéroport. Contient son type, ainsi que des références sur ces points d'intérêts.
+- Point2D : représente des points sur deux axes.
+- Point3D : représente des points sur trois axes.
+- Terminal : représente un terminal de l'aéroport. Gère les avions qui sont au terminal.
+- TowerSimulation : Représente la simulation. Classe principale du programme.
+- Waypoint : indique l'état d'un avion.
+- Runway : piste d'atterrisage.
+- Tower : tour de contrôle. Gère les instructions pour les avions.
+
 Pour les classes `Tower`, `Aircaft`, `Airport` et `Terminal`, listez leurs fonctions-membre publiques et expliquez précisément à quoi elles servent.
 Réalisez ensuite un schéma présentant comment ces différentes classes intéragissent ensemble.
 
+- Tower
+  - `WaypointQueue get_instructions(Aircraft& aircraft);` : produit les instructions pour un avion. Peut le rapprocher de l'aéroport, sinon réserve un terminal pour faire atterrir l'avion. Peut ausi le faire redécoller si besoin. 
+  - `void arrived_at_terminal(const Aircraft& aircraft);` : effectue les actions d'arrivée à un terminal pour l'avion aircraft.
+- Aircraft
+  - `const std::string& get_flight_num() const;` : Renvoie le numéro de vol de l'avion.
+  - `float distance_to(const Point3D& p) const;` : Renvoie la distance de l'avion par rapport à un point donné.
+  - `void display() const override;` : affiche l'avion à sa position.
+  - `void move() override;` :  déplace l'avion dans la scène.
+- Airport
+  - `Tower& get_tower();` : renvoie la tour de contrôle associée à l'aéroport.
+  - `void display() const override;` : affiche l'aéroport 
+  - `void move() override;` : incrémente le progrès de service de chaque terminal attribué.
+- Terminal
+  - `bool in_use() const;` : renvoie si un terminal est utilisé par un avion ou non.
+  - `bool is_servicing() const;` : renvoie si un terminal est encore en service.
+  - `void assign_craft(const Aircraft& aircraft);` : assigne un avion au terminal.
+  - `void start_service(const Aircraft& aircraft);` : commence le service d'un terminal 
+  - `void finish_service();` : termine le service d'un terminal
+  - `void move() override;` : incrémente le service d'un terminal.
+
 Quelles classes et fonctions sont impliquées dans la génération du chemin d'un avion ?
+
+La classe Tower avec get_instructions, la classe waypoint qui représente des points de contrôle par lesquels doit passer un avion.
+
 Quel conteneur de la librairie standard a été choisi pour représenter le chemin ?
 Expliquez les intérêts de ce choix.
+
+-- Le conteneur de la librairie standard choisi est deque. Il permet une insertion et une suppression très rapide au début et à la fin de la structure de données.
 
 ## C- Bidouillons !
 
