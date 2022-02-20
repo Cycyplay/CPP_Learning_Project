@@ -92,6 +92,8 @@ Ajoutez deux nouveaux inputs au programme permettant d'augmenter ou de diminuer 
 Essayez maintenant de mettre en pause le programme en manipulant ce framerate. Que se passe-t-il ?\
 Ajoutez une nouvelle fonctionnalité au programme pour mettre le programme en pause, et qui ne passe pas par le framerate.
 
+-- Si on met le framerate à 0, le programme s'arrête. (division par 0). 
+
 3) Identifiez quelle variable contrôle le temps de débarquement des avions et doublez-le.
 
 4) Lorsqu'un avion a décollé, il réattérit peu de temps après.
