@@ -104,7 +104,14 @@ Pourquoi n'est-il pas sûr de procéder au retrait de l'avion dans cette fonctio
 A quel endroit de la callstack pourriez-vous le faire à la place ?\
 Que devez-vous modifier pour transmettre l'information de la première à la seconde fonction ?
 
-5) Lorsqu'un objet de type `Displayable` est créé, il faut ajouter celui-ci manuellement dans la liste des objets à afficher.
+-- On peut savoir que l'on peut supprimer un avion quand il ne possède plus de waypoint et qu'il a déjà atteri.\
+Dans la fonction get_instructions de tower.cpp, cela correspond au bloc conditionel où est écrit le commentaire "get a path for the craft to start".\
+Il n'est pas sûr de procéder au retrait de l'avion dans cette fonction car il la fonction move est appeler via un iterator sur le unordered_set move_queue. Quand on erase un élément, on finit par en sauter un élément de l'itérable.
+Il faudrait donc transmettre l'information à la méthode timer et ensuite retirer les avions après être sorti de l'iterator.
+J'ai donc changé la signature de la fonction move pour qu'elle renvoie un bool pour savoir si l'objet peut encore se déplacer ou non.
+
+
+1) Lorsqu'un objet de type `Displayable` est créé, il faut ajouter celui-ci manuellement dans la liste des objets à afficher.
 Il faut également penser à le supprimer de cette liste avant de le détruire.
 Faites en sorte que l'ajout et la suppression de `display_queue` soit "automatiquement gérée" lorsqu'un `Displayable` est créé ou détruit.
 Pourquoi n'est-il pas spécialement pertinent d'en faire de même pour `DynamicObject` ?
