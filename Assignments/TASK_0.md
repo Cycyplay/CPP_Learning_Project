@@ -111,10 +111,12 @@ Il faudrait donc transmettre l'information à la méthode timer et ensuite retir
 J'ai donc changé la signature de la fonction move pour qu'elle renvoie un bool pour savoir si l'objet peut encore se déplacer ou non.
 
 
-1) Lorsqu'un objet de type `Displayable` est créé, il faut ajouter celui-ci manuellement dans la liste des objets à afficher.
+5) Lorsqu'un objet de type `Displayable` est créé, il faut ajouter celui-ci manuellement dans la liste des objets à afficher.
 Il faut également penser à le supprimer de cette liste avant de le détruire.
 Faites en sorte que l'ajout et la suppression de `display_queue` soit "automatiquement gérée" lorsqu'un `Displayable` est créé ou détruit.
 Pourquoi n'est-il pas spécialement pertinent d'en faire de même pour `DynamicObject` ?
+
+-- Le DynamicObject pourrait être réutiliser plus tard.
 
 6) La tour de contrôle a besoin de stocker pour tout `Aircraft` le `Terminal` qui lui est actuellement attribué, afin de pouvoir le libérer une fois que l'avion décolle.
 Cette information est actuellement enregistrée dans un `std::vector<std::pair<const Aircraft*, size_t>>` (size_t représentant l'indice du terminal).
