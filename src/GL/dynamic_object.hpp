@@ -7,7 +7,7 @@ namespace GL {
 class DynamicObject
 {
 public:
-    virtual ~DynamicObject() { std::cout << "DO destroyed" << std::endl; }
+    virtual ~DynamicObject() {}
 
     virtual bool move() = 0;
 };
