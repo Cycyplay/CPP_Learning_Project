@@ -25,6 +25,8 @@ Réfléchissez aux pour et contre de chacune de ces options.
 
 Pour le restant de l'exercice, vous partirez sur le premier choix.
 
+//TODO QUESTIONS
+
 ### B - Déterminer le propriétaire de chaque avion
 
 Vous allez introduire une nouvelle liste de références sur les avions du programme.
@@ -32,9 +34,20 @@ Il serait donc bon de savoir qui est censé détruire les avions du programme, a
 
 Répondez aux questions suivantes :
 1. Qui est responsable de détruire les avions du programme ? (si vous ne trouvez pas, faites/continuez la question 4 dans TASK_0)
+   
+La méthode `timer` dans opengl_interface s'occupe d'appeler toutes les fonctions-membres des objets DynamicObject. C'est lors de cette itération que les avions sont retirés du programme (après avoir été retiré de `move_queue`).   
+
 2. Quelles autres structures contiennent une référence sur un avion au moment où il doit être détruit ?
+
+Lorsqu'on retire un avion de la `move_queue` et qu'il est détruit, il possède également une référence dans `display_queue`. La unordered_map `reserved_terminals` qui indiquent le terminal associé à un avion s'il est au sol. Cependant, lors de la suppression d'un avion, il est (du moins pour le moment) dans le ciel, donc il n'existe pas dans cette map.
+
 3. Comment fait-on pour supprimer la référence sur un avion qui va être détruit dans ces structures ?
+
+Pour retirer un avion de la `display_queue`, on utilise le destructeur de Displayable. La référence de l'avion va donc être retirée automatiquement.
+
 4. Pourquoi n'est-il pas très judicieux d'essayer d'appliquer la même chose pour votre `AircraftManager` ?
+
+Si notre `AircraftManager` applique ce même genrede comportement, ça impliquerait que les avions hériterait de la classe `AircraftManager`, ce qui n'a pas vraiment de sens. On veut que ce soit cette classe qui gère les avions et non pas les avions qui se gère entre eux. 
 
 Pour simplifier le problème, vous allez déplacer l'ownership des avions dans la classe `AircraftManager`.
 Vous allez également faire en sorte que ce soit cette classe qui s'occupe de déplacer les avions, et non plus la fonction `timer`.
