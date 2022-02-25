@@ -106,7 +106,7 @@ Que devez-vous modifier pour transmettre l'information de la première à la sec
 
 -- On peut savoir que l'on peut supprimer un avion quand il ne possède plus de waypoint et qu'il a déjà atteri.\
 Dans la fonction get_instructions de tower.cpp, cela correspond au bloc conditionel où est écrit le commentaire "get a path for the craft to start".\
-Il n'est pas sûr de procéder au retrait de l'avion dans cette fonction car il la fonction move est appeler via un iterator sur le unordered_set move_queue. Quand on erase un élément, on finit par en sauter un élément de l'itérable.
+Il n'est pas sûr de procéder au retrait de l'avion dans cette fonction car la fonction move est appelée via un iterator sur le unordered_set move_queue. Quand on erase un élément, on fini par sauter un élément de l'itérable.
 Il faudrait donc transmettre l'information à la méthode timer et ensuite retirer les avions après être sorti de l'iterator.
 J'ai donc changé la signature de la fonction move pour qu'elle renvoie un bool pour savoir si l'objet peut encore se déplacer ou non.
 
@@ -127,8 +127,12 @@ Modifiez le code afin d'utiliser un conteneur STL plus adapté. Normalement, à 
 
 1) Comment a-t-on fait pour que seule la classe `Tower` puisse réserver un terminal de l'aéroport ?
 
+-- L'ensemble des terminaux reservés est un attriut privé de la classe Tower. C'est donc le seul à y avoir accès.
+
 2) En regardant le contenu de la fonction `void Aircraft::turn(Point3D direction)`, pourquoi selon-vous ne sommes-nous pas passer par une réference ?
 Pensez-vous qu'il soit possible d'éviter la copie du `Point3D` passé en paramètre ?
+
+-- Nous ne sommnes pas passé par une référence car la fonction cap_length renvoie une référence d'un Point3D qui vient d'être modifié.
 
 ## E- Bonus
 
