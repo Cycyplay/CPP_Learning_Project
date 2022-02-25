@@ -58,9 +58,7 @@ public:
         texture { image },
         terminals { type.create_terminals() },
         tower { *this }
-    {
-        GL::display_queue.emplace_back(this);
-    }
+    {}
 
     Tower& get_tower() { return tower; }
 
@@ -75,14 +73,7 @@ public:
         return true;
     }
 
-    ~Airport()
-    {
-        const auto it = std::find(GL::display_queue.begin(), GL::display_queue.end(), this);
-        if (it != GL::display_queue.end())
-        {
-            GL::display_queue.erase(it);
-        }
-    }
+    ~Airport() {}
 
     friend class Tower;
 };
