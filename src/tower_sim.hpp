@@ -21,6 +21,7 @@ private:
     void display_help() const;
 
     void init_airport();
+    void init_aircraft_manager();
 
 public:
     TowerSimulation(int argc, char** argv);
