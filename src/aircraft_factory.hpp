@@ -3,14 +3,23 @@
 #include "aircraft.hpp"
 #include "airport.hpp"
 
+#include <string>
+#include <unordered_set>
+
 struct AircraftType;
 
 class AircraftFactory
 {
 private:
+    using AircraftFlightNumber = std::unordered_set<std::string>;
+
     const std::string airlines[8]          = { "AF", "LH", "EY", "DL", "KL", "BA", "AY", "EY" };
     const static size_t NUM_AIRCRAFT_TYPES = 3;
     AircraftType* aircraft_types[NUM_AIRCRAFT_TYPES] {};
+
+    AircraftFlightNumber flight_numbers = {};
+
+    bool exists(const std::string& flight_number) const;
 
 public:
     AircraftFactory()
