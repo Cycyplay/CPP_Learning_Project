@@ -3,6 +3,7 @@
 #include "aircraft.hpp"
 #include "airport.hpp"
 
+#include <memory>
 #include <string>
 #include <unordered_set>
 
@@ -31,6 +32,6 @@ public:
         }
     }
 
-    Aircraft* create_aircraft(Airport* airport, const AircraftType& type);
-    Aircraft* create_random_aircraft(Airport* airport);
+    std::unique_ptr<Aircraft> create_aircraft(Airport* airport, const AircraftType& type);
+    std::unique_ptr<Aircraft> create_random_aircraft(Airport* airport);
 };

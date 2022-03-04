@@ -1,25 +1,17 @@
 #include "aircraft_manager.hpp"
 
+#include <algorithm>
+#include <memory>
+
 void AircraftManager::move()
 {
-    std::unordered_set<Aircraft*> to_remove;
-
-    for (auto& aircraft : aircrafts)
-    {
-        if (!aircraft->move())
-        {
-            to_remove.emplace(aircraft);
-        }
-    }
-
-    for (auto& aircraft : to_remove)
-    {
-        aircrafts.erase(aircraft);
-        delete aircraft;
-    }
+    aircrafts.erase(std::remove_if(aircrafts.begin(), aircrafts.end(),
+                                   [](std::unique_ptr<Aircraft>& aircraft) { return !aircraft->move(); }),
+                    aircrafts.end());
 }
 
-void AircraftManager::add_aircraft_to_simulation(Aircraft* aircraft)
+void AircraftManager::add_aircraft_to_simulation(std::unique_ptr<Aircraft>& aircraft)
 {
-    aircrafts.emplace(aircraft);
+
+    aircrafts.emplace_back(std::move(aircraft));
 }

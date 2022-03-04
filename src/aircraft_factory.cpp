@@ -12,7 +12,7 @@ bool AircraftFactory::exists(const std::string& flight_number) const
     return flight_numbers.find(flight_number) != flight_numbers.end();
 }
 
-Aircraft* AircraftFactory::create_aircraft(Airport* airport, const AircraftType& type)
+std::unique_ptr<Aircraft> AircraftFactory::create_aircraft(Airport* airport, const AircraftType& type)
 {
     assert(airport); // make sure the airport is initialized before creating aircraft
 
@@ -26,12 +26,11 @@ Aircraft* AircraftFactory::create_aircraft(Airport* airport, const AircraftType&
     const Point3D start     = Point3D { std::sin(angle), std::cos(angle), 0 } * 3 + Point3D { 0, 0, 2 };
     const Point3D direction = (-start).normalize();
 
-    Aircraft* aircraft = new Aircraft { type, flight_number, start, direction, airport->get_tower() };
-
-    return aircraft;
+    flight_numbers.emplace(flight_number);
+    return std::make_unique<Aircraft>(type, flight_number, start, direction, airport->get_tower());
 }
 
-Aircraft* AircraftFactory::create_random_aircraft(Airport* airport)
+std::unique_ptr<Aircraft> AircraftFactory::create_random_aircraft(Airport* airport)
 {
     return create_aircraft(airport, *(aircraft_types[rand() % 3]));
 }

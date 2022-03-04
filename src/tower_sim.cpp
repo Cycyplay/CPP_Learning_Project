@@ -12,6 +12,8 @@
 #include <cassert>
 #include <cstdlib>
 #include <ctime>
+#include <memory>
+#include <utility>
 
 using namespace std::string_literals;
 
@@ -32,9 +34,10 @@ void TowerSimulation::create_aircraft() const
 {
     assert(aircraft_manager);
 
-    Aircraft* aircraft = aircraft_factory->create_random_aircraft(airport);
+    auto aircraft = aircraft_factory->create_random_aircraft(airport);
+    auto move_ptr = std::move(aircraft);
 
-    aircraft_manager->add_aircraft_to_simulation(aircraft);
+    aircraft_manager->add_aircraft_to_simulation(move_ptr);
 }
 
 void TowerSimulation::create_keystrokes() const

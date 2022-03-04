@@ -2,10 +2,12 @@
 
 #include "aircraft.hpp"
 
+#include <memory>
+
 class AircraftManager : public GL::DynamicObject
 {
 private:
-    using SimulationAircrafts = std::unordered_set<Aircraft*>;
+    using SimulationAircrafts = std::vector<std::unique_ptr<Aircraft>>;
 
     SimulationAircrafts aircrafts = {};
 
@@ -14,5 +16,5 @@ public:
 
     void move() override;
 
-    void add_aircraft_to_simulation(Aircraft* aircraft);
+    void add_aircraft_to_simulation(std::unique_ptr<Aircraft>& aircraft);
 };
