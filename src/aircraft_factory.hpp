@@ -34,4 +34,6 @@ public:
 
     std::unique_ptr<Aircraft> create_aircraft(Airport* airport, const AircraftType& type);
     std::unique_ptr<Aircraft> create_random_aircraft(Airport* airport);
+
+    void get_airlines_aircraft_count(const int airline);
 };

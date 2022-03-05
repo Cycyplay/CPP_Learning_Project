@@ -3,8 +3,10 @@
 #include "airport_type.hpp"
 #include "geometry.hpp"
 
+#include <algorithm>
 #include <cassert>
 #include <cstdlib>
+#include <iostream>
 #include <string>
 
 bool AircraftFactory::exists(const std::string& flight_number) const
@@ -33,4 +35,18 @@ std::unique_ptr<Aircraft> AircraftFactory::create_aircraft(Airport* airport, con
 std::unique_ptr<Aircraft> AircraftFactory::create_random_aircraft(Airport* airport)
 {
     return create_aircraft(airport, *(aircraft_types[rand() % 3]));
+}
+
+void AircraftFactory::get_airlines_aircraft_count(const int airline)
+{
+    if (airline < 0 || airline >= 8)
+    {
+        std::cout << "Invalid input for 'get_airlines_aircraft_count'" << std::endl;
+    }
+
+    std::cout << airlines[airline] << " : "
+              << std::count_if(flight_numbers.begin(), flight_numbers.end(),
+                               [this, airline](std::string flight)
+                               { return airlines[airline].compare(0, 2, flight, 0, 2) == 0; })
+              << std::endl;
 }
