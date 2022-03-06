@@ -136,6 +136,10 @@ bool Aircraft::move()
             {
                 pos.z() -= SINK_FACTOR * (SPEED_THRESHOLD - speed_len);
             }
+            if (--fuel == 0)
+            {
+                std::cout << flight_number << " is about to crash !!" << std::endl;
+            }
         }
 
         // update the z-value of the displayable structure
