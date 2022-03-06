@@ -70,5 +70,7 @@ public:
     bool move();
     unsigned int remaining_fuel() const { return fuel; }
 
+    bool has_terminal() const;
+
     friend class Tower;
 };
