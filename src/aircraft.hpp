@@ -73,5 +73,7 @@ public:
     bool has_terminal() const;
     bool is_circling() const;
 
+    bool is_low_on_fuel() const;
+
     friend class Tower;
 };
