@@ -12,6 +12,8 @@
 
 #include <vector>
 
+class AircraftManager;
+
 class Airport : public GL::Displayable, public GL::DynamicObject
 {
 private:
@@ -20,6 +22,12 @@ private:
     const GL::Texture2D texture;
     std::vector<Terminal> terminals;
     Tower tower;
+
+    AircraftManager* aircraft_manager = nullptr;
+
+    int fuel_stock       = 0;
+    int ordered_fuel     = 0;
+    int next_refill_time = 0;
 
     // reserve a terminal
     // if a terminal is free, return
@@ -71,6 +79,8 @@ public:
             t.move();
         }
     }
+
+    void set_aircraft_manager(AircraftManager* manager) { aircraft_manager = manager; }
 
     ~Airport() {}
 

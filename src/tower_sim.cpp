@@ -101,6 +101,7 @@ void TowerSimulation::launch()
 
     init_airport();
     init_aircraft_manager();
+    airport->set_aircraft_manager(aircraft_manager);
 
     GL::loop();
 }
