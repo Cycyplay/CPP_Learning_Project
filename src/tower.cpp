@@ -76,3 +76,16 @@ WaypointQueue Tower::reserve_terminal(Aircraft& aircraft)
     }
     return vp.first;
 }
+
+void Tower::remove_aircraft_form_terminal_if_is_about_to_crash(Aircraft& aircraft)
+{
+    const auto it = reserved_terminals.find(&aircraft);
+    assert(it != reserved_terminals.end());
+    const auto terminal_num = it->second;
+    Terminal& terminal      = airport.get_terminal(terminal_num);
+    if (!terminal.is_servicing())
+    {
+        terminal.finish_service();
+        reserved_terminals.erase(it);
+    }
+}

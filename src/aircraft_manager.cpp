@@ -37,7 +37,7 @@ void AircraftManager::add_aircraft_to_simulation(std::unique_ptr<Aircraft>& airc
     aircrafts.emplace_back(std::move(aircraft));
 }
 
-unsigned int AircraftManager::get_required_fuel() const
+int AircraftManager::get_required_fuel() const
 {
     return std::accumulate(aircrafts.begin(), aircrafts.end(), 0,
                            [](unsigned int acc, const std::unique_ptr<Aircraft>& aircraft)

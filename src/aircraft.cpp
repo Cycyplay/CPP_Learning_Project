@@ -139,6 +139,10 @@ bool Aircraft::move()
             if (--fuel == 0)
             {
                 std::cout << flight_number << " is about to crash !!" << std::endl;
+                if (has_terminal())
+                {
+                    control.remove_aircraft_form_terminal_if_is_about_to_crash(*this);
+                }
             }
 
             if (is_circling())

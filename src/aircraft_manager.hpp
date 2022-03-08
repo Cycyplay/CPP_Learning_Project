@@ -18,5 +18,5 @@ public:
 
     void add_aircraft_to_simulation(std::unique_ptr<Aircraft>& aircraft);
 
-    unsigned int get_required_fuel() const;
+    int get_required_fuel() const;
 };
