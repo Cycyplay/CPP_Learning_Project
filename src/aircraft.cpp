@@ -181,3 +181,25 @@ bool Aircraft::is_aircraft_at_terminal() const
 {
     return is_at_terminal;
 }
+
+void Aircraft::refill(int& fuel_stock)
+{
+    int fuel_to_withdraw = 3000 - fuel;
+
+    std::cout << flight_number << " has withdraw ";
+
+    if ((fuel_stock - fuel_to_withdraw) < 0)
+    {
+        std::cout << fuel_stock;
+        fuel += fuel_stock;
+        fuel_stock = 0;
+    }
+    else
+    {
+        fuel = 3000;
+        fuel_stock -= fuel_to_withdraw;
+        std::cout << fuel_to_withdraw;
+    }
+
+    std::cout << " unit of fuel from fuel_stock" << std::endl;
+}
