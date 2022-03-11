@@ -34,7 +34,7 @@ void TowerSimulation::create_aircraft() const
 {
     assert(aircraft_manager);
 
-    auto aircraft = aircraft_factory->create_random_aircraft(airport);
+    auto aircraft = aircraft_factory->create_random_aircraft(*airport);
     auto move_ptr = std::move(aircraft);
 
     aircraft_manager->add_aircraft_to_simulation(move_ptr);
@@ -53,14 +53,14 @@ void TowerSimulation::create_keystrokes() const
     GL::keystrokes.emplace('*', []() { GL::ticks_per_sec--; });
     GL::keystrokes.emplace('p', []() { GL::toggle_pause(); });
 
-    GL::keystrokes.emplace('0', [this]() { aircraft_factory->get_airlines_aircraft_count(0); });
-    GL::keystrokes.emplace('1', [this]() { aircraft_factory->get_airlines_aircraft_count(1); });
-    GL::keystrokes.emplace('2', [this]() { aircraft_factory->get_airlines_aircraft_count(2); });
-    GL::keystrokes.emplace('3', [this]() { aircraft_factory->get_airlines_aircraft_count(3); });
-    GL::keystrokes.emplace('4', [this]() { aircraft_factory->get_airlines_aircraft_count(4); });
-    GL::keystrokes.emplace('5', [this]() { aircraft_factory->get_airlines_aircraft_count(5); });
-    GL::keystrokes.emplace('6', [this]() { aircraft_factory->get_airlines_aircraft_count(6); });
-    GL::keystrokes.emplace('7', [this]() { aircraft_factory->get_airlines_aircraft_count(7); });
+    GL::keystrokes.emplace('0', [this]() { aircraft_factory->get_airlines_aircraft_count(0u); });
+    GL::keystrokes.emplace('1', [this]() { aircraft_factory->get_airlines_aircraft_count(1u); });
+    GL::keystrokes.emplace('2', [this]() { aircraft_factory->get_airlines_aircraft_count(2u); });
+    GL::keystrokes.emplace('3', [this]() { aircraft_factory->get_airlines_aircraft_count(3u); });
+    GL::keystrokes.emplace('4', [this]() { aircraft_factory->get_airlines_aircraft_count(4u); });
+    GL::keystrokes.emplace('5', [this]() { aircraft_factory->get_airlines_aircraft_count(5u); });
+    GL::keystrokes.emplace('6', [this]() { aircraft_factory->get_airlines_aircraft_count(6u); });
+    GL::keystrokes.emplace('7', [this]() { aircraft_factory->get_airlines_aircraft_count(7u); });
 }
 
 void TowerSimulation::display_help() const

@@ -14,8 +14,8 @@ class AircraftFactory
 private:
     using AircraftFlightNumber = std::unordered_set<std::string>;
 
-    const std::string airlines[8]          = { "AF", "LH", "EY", "DL", "KL", "BA", "AY", "EY" };
-    const static size_t NUM_AIRCRAFT_TYPES = 3;
+    const std::array<std::string, 8> airlines = { "AF", "LH", "EY", "DL", "KL", "BA", "AY", "EY" };
+    const static size_t NUM_AIRCRAFT_TYPES    = 3;
     AircraftType* aircraft_types[NUM_AIRCRAFT_TYPES] {};
 
     AircraftFlightNumber flight_numbers = {};
@@ -32,8 +32,8 @@ public:
         }
     }
 
-    std::unique_ptr<Aircraft> create_aircraft(Airport* airport, const AircraftType& type);
-    std::unique_ptr<Aircraft> create_random_aircraft(Airport* airport);
+    std::unique_ptr<Aircraft> create_aircraft(Airport& airport, const AircraftType& type);
+    std::unique_ptr<Aircraft> create_random_aircraft(Airport& airport);
 
-    void get_airlines_aircraft_count(const int airline);
+    void get_airlines_aircraft_count(const unsigned int airline) const;
 };
