@@ -27,8 +27,7 @@ void AircraftManager::move()
               });
 
     aircrafts.erase(std::remove_if(aircrafts.begin(), aircrafts.end(),
-                                   [](std::unique_ptr<Aircraft>& aircraft)
-                                   { return !aircraft->move() || aircraft->remaining_fuel() == 0; }),
+                                   [](std::unique_ptr<Aircraft>& aircraft) { return !aircraft->move(); }),
                     aircrafts.end());
 }
 

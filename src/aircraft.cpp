@@ -140,10 +140,7 @@ bool Aircraft::move()
             {
                 std::cout << flight_number << " is about to crash !!" << std::endl;
                 //à enlever et à traiter avec AircraftCrash
-                if (has_terminal())
-                {
-                    control.remove_aircraft_form_terminal_if_is_about_to_crash(*this);
-                }
+                return false;
             }
 
             if (is_circling())
