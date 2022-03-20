@@ -37,7 +37,7 @@ std::unique_ptr<Aircraft> AircraftFactory::create_random_aircraft(Airport& airpo
     return create_aircraft(airport, *(aircraft_types[rand() % 3]));
 }
 
-void AircraftFactory::get_airlines_aircraft_count(const unsigned int airline) const
+void AircraftFactory::print_airlines_aircraft_count(const unsigned int airline) const
 {
     if (airline >= airlines.size())
     {

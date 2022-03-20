@@ -49,18 +49,22 @@ void TowerSimulation::create_keystrokes() const
     GL::keystrokes.emplace('-', []() { GL::change_zoom(1.05f); });
     GL::keystrokes.emplace('f', []() { GL::toggle_fullscreen(); });
 
-    GL::keystrokes.emplace('$', []() { GL::ticks_per_sec++; });
-    GL::keystrokes.emplace('*', []() { GL::ticks_per_sec--; });
+    GL::keystrokes.emplace(':', []() { GL::ticks_per_sec++; });
+    GL::keystrokes.emplace(';', []() { GL::ticks_per_sec--; });
     GL::keystrokes.emplace('p', []() { GL::toggle_pause(); });
 
-    GL::keystrokes.emplace('0', [this]() { aircraft_factory->get_airlines_aircraft_count(0u); });
-    GL::keystrokes.emplace('1', [this]() { aircraft_factory->get_airlines_aircraft_count(1u); });
-    GL::keystrokes.emplace('2', [this]() { aircraft_factory->get_airlines_aircraft_count(2u); });
-    GL::keystrokes.emplace('3', [this]() { aircraft_factory->get_airlines_aircraft_count(3u); });
-    GL::keystrokes.emplace('4', [this]() { aircraft_factory->get_airlines_aircraft_count(4u); });
-    GL::keystrokes.emplace('5', [this]() { aircraft_factory->get_airlines_aircraft_count(5u); });
-    GL::keystrokes.emplace('6', [this]() { aircraft_factory->get_airlines_aircraft_count(6u); });
-    GL::keystrokes.emplace('7', [this]() { aircraft_factory->get_airlines_aircraft_count(7u); });
+    GL::keystrokes.emplace('m',
+                           [this]()
+                           {
+                               std::cout << "Crashed Aircraft Count : "
+                                         << this->aircraft_manager->get_crashed_aircraft_count() << std::endl;
+                           });
+
+    unsigned int airlines_count = aircraft_factory->get_airlines_count();
+    for (unsigned int i = 0; i < airlines_count; i++)
+    {
+        GL::keystrokes.emplace(i + '0', [this, i]() { aircraft_factory->print_airlines_aircraft_count(i); });
+    }
 }
 
 void TowerSimulation::display_help() const
