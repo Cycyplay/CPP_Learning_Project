@@ -2,6 +2,7 @@
 
 #include "GL/opengl_interface.hpp"
 
+#include <cassert>
 #include <cmath>
 
 void Aircraft::turn_to_waypoint()
@@ -185,6 +186,8 @@ bool Aircraft::is_aircraft_at_terminal() const
 
 void Aircraft::refill(int& fuel_stock)
 {
+    assert(&fuel_stock);
+
     int fuel_to_withdraw = 3000 - fuel;
 
     std::cout << flight_number << " has withdraw ";

@@ -15,6 +15,8 @@ WaypointQueue Tower::get_circle() const
 
 WaypointQueue Tower::get_instructions(Aircraft& aircraft)
 {
+    assert(&aircraft);
+
     if (!aircraft.is_at_terminal)
     {
         // if the aircraft is far, then just guide it to the airport vicinity
@@ -61,6 +63,8 @@ WaypointQueue Tower::get_instructions(Aircraft& aircraft)
 
 void Tower::arrived_at_terminal(const Aircraft& aircraft)
 {
+    assert(&aircraft);
+
     const auto it = reserved_terminals.find(&aircraft);
     assert(it != reserved_terminals.end());
     airport.get_terminal(it->second).start_service(aircraft);
@@ -68,6 +72,7 @@ void Tower::arrived_at_terminal(const Aircraft& aircraft)
 
 WaypointQueue Tower::reserve_terminal(Aircraft& aircraft)
 {
+    assert(&aircraft);
     // try and reserve a terminal for the craft to land
     const auto vp = airport.reserve_terminal(aircraft);
     if (!vp.first.empty())
@@ -79,6 +84,8 @@ WaypointQueue Tower::reserve_terminal(Aircraft& aircraft)
 
 void Tower::remove_aircraft_form_terminal_if_is_about_to_crash(Aircraft& aircraft)
 {
+    assert(&aircraft);
+
     const auto it = reserved_terminals.find(&aircraft);
     assert(it != reserved_terminals.end());
     const auto terminal_num = it->second;

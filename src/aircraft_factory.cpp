@@ -17,11 +17,13 @@ bool AircraftFactory::exists(const std::string& flight_number) const
 std::unique_ptr<Aircraft> AircraftFactory::create_aircraft(Airport& airport, const AircraftType& type)
 {
     assert(&airport); // make sure the airport is initialized before creating aircraft
+    assert(&type);
 
-    std::string flight_number = airlines[std::rand() % 8] + std::to_string(1000 + (rand() % 9000));
+    std::string flight_number =
+        airlines[std::rand() % airlines.size()] + std::to_string(1000 + (rand() % 9000));
     while (exists(flight_number))
     {
-        flight_number = airlines[std::rand() % 8] + std::to_string(1000 + (rand() % 9000));
+        flight_number = airlines[std::rand() % airlines.size()] + std::to_string(1000 + (rand() % 9000));
     }
 
     const float angle       = (rand() % 1000) * 2 * 3.141592f / 1000.f; // random angle between 0 and 2pi
@@ -41,7 +43,8 @@ void AircraftFactory::print_airlines_aircraft_count(const unsigned int airline) 
 {
     if (airline >= airlines.size())
     {
-        std::cout << "Invalid input for 'get_airlines_aircraft_count'" << std::endl;
+        std::cout << "Invalid input for 'print_airlines_aircraft_count'" << std::endl;
+        return;
     }
 
     std::cout << airlines[airline] << " : "

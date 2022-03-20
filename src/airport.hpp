@@ -101,7 +101,11 @@ public:
         }
     }
 
-    void set_aircraft_manager(AircraftManager* manager) { aircraft_manager = manager; }
+    void set_aircraft_manager(AircraftManager* manager)
+    {
+        assert(aircraft_manager == nullptr);
+        aircraft_manager = manager;
+    }
 
     ~Airport() {}
 

@@ -40,8 +40,10 @@ void TowerSimulation::create_aircraft() const
     aircraft_manager->add_aircraft_to_simulation(move_ptr);
 }
 
-void TowerSimulation::create_keystrokes() const
+void TowerSimulation::create_keystrokes()
 {
+    assert(!has_init_keystroke);
+
     GL::keystrokes.emplace('x', []() { GL::exit_loop(); });
     GL::keystrokes.emplace('q', []() { GL::exit_loop(); });
     GL::keystrokes.emplace('c', [this]() { create_aircraft(); });
@@ -65,6 +67,8 @@ void TowerSimulation::create_keystrokes() const
     {
         GL::keystrokes.emplace(i + '0', [this, i]() { aircraft_factory->print_airlines_aircraft_count(i); });
     }
+
+    has_init_keystroke = true;
 }
 
 void TowerSimulation::display_help() const
@@ -82,6 +86,8 @@ void TowerSimulation::display_help() const
 
 void TowerSimulation::init_airport()
 {
+    assert(airport == nullptr);
+
     airport = new Airport { one_lane_airport, Point3D { 0, 0, 0 },
                             new img::Image { one_lane_airport_sprite_path.get_full_path() } };
 
@@ -90,6 +96,8 @@ void TowerSimulation::init_airport()
 
 void TowerSimulation::init_aircraft_manager()
 {
+    assert(aircraft_manager == nullptr);
+
     aircraft_manager = new AircraftManager();
 
     GL::move_queue.emplace(aircraft_manager);
