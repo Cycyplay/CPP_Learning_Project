@@ -98,7 +98,11 @@ bool Aircraft::move()
             return false;
         }
 
-        waypoints = control.get_instructions(*this);
+        auto front = false;
+        for (const auto& wp : control.get_instructions(*this))
+        {
+            add_waypoint(wp, front);
+        }
     }
 
     if (!is_at_terminal)
