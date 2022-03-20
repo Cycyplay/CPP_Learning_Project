@@ -138,9 +138,8 @@ bool Aircraft::move()
             }
             if (--fuel == 0)
             {
-                std::cout << flight_number << " is about to crash !!" << std::endl;
-                //à enlever et à traiter avec AircraftCrash
-                return false;
+                using namespace std::string_literals;
+                throw AircraftCrash { flight_number + " didn't have any fuel left and sank"s };
             }
 
             if (is_circling())

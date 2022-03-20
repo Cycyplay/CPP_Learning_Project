@@ -63,7 +63,6 @@ public:
 
     ~Aircraft()
     {
-        std::cout << flight_number << " has been destroyed" << std::endl;
         if (has_terminal())
         {
             control.remove_aircraft_form_terminal_if_is_about_to_crash(*this);
