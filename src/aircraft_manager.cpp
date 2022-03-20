@@ -1,5 +1,7 @@
 #include "aircraft_manager.hpp"
 
+#include "config.hpp"
+
 #include <algorithm>
 #include <memory>
 
@@ -27,7 +29,20 @@ void AircraftManager::move()
               });
 
     aircrafts.erase(std::remove_if(aircrafts.begin(), aircrafts.end(),
-                                   [](std::unique_ptr<Aircraft>& aircraft) { return !aircraft->move(); }),
+                                   [](std::unique_ptr<Aircraft>& aircraft)
+                                   {
+                                       try
+                                       {
+                                           return !aircraft->move();
+                                       } catch (const AircraftCrash& crash)
+                                       {
+                                           // si l'avion se crash, c'est qu'il ne peut plus se déplacer
+                                           // la fonction remove_if s'occupera de tout déréférencer
+                                           std::cerr << crash.what() << std::endl;
+                                           return true;
+                                       }
+                                   }),
+
                     aircrafts.end());
 }
 
