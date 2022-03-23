@@ -87,7 +87,8 @@ Expliquez les intérêts de ce choix.
 Le Concorde est censé pouvoir voler plus vite que les autres avions.
 Modifiez le programme pour tenir compte de cela.
 
-2) Identifiez quelle variable contrôle le framerate de la simulation.
+2) Identifiez quelle variable contrôle le framerate de la simulation.\
+Le framerate correspond au temps de rafraichissement du programme, c'est-à-dire le nombre de fois où les éléments du programme seront mis à jour (ajout de nouvel avion à la simulation, déplacement, etc) en une seconde.\
 Ajoutez deux nouveaux inputs au programme permettant d'augmenter ou de diminuer cette valeur.
 Essayez maintenant de mettre en pause le programme en manipulant ce framerate. Que se passe-t-il ?\
 Ajoutez une nouvelle fonctionnalité au programme pour mettre le programme en pause, et qui ne passe pas par le framerate.
@@ -97,7 +98,8 @@ Ajoutez une nouvelle fonctionnalité au programme pour mettre le programme en pa
 3) Identifiez quelle variable contrôle le temps de débarquement des avions et doublez-le.
 
 4) Lorsqu'un avion a décollé, il réattérit peu de temps après.
-Faites en sorte qu'à la place, il soit retiré du programme.\
+Assurez-vous qu'à la place, il soit supprimé de la `move_queue`.\
+Pour tester, il suffit de dézoomer et de vérifier que les avions suffisament éloignés ne bougent plus.
 Indices :\
 A quel endroit pouvez-vous savoir que l'avion doit être supprimé ?\
 Pourquoi n'est-il pas sûr de procéder au retrait de l'avion dans cette fonction ?
@@ -112,8 +114,9 @@ J'ai donc changé la signature de la fonction move pour qu'elle renvoie un bool 
 
 5) Lorsqu'un objet de type `Displayable` est créé, il faut ajouter celui-ci manuellement dans la liste des objets à afficher.
 Il faut également penser à le supprimer de cette liste avant de le détruire.
-Faites en sorte que l'ajout et la suppression de `display_queue` soit "automatiquement gérée" lorsqu'un `Displayable` est créé ou détruit.
-Pourquoi n'est-il pas spécialement pertinent d'en faire de même pour `DynamicObject` ?
+Faites en sorte que l'ajout et la suppression de `display_queue` soit "automatiquement gérée" lorsqu'un `Displayable` est créé ou détruit.\
+Essayez maintenant de supprimer complètement l'avion du programme lorsque vous le retirez de la `move_queue`.\
+En dézoomant, vous devriez maintenant constater que les avions disparaissent maintenant de l'écran.
 
 -- Le retrait d'un DynamicObject a déjà été géré. La suppression du Displayable entrainera la suppression du DynamicObject en général car les classes héritent souvent des deux en même temps.
 
@@ -129,8 +132,8 @@ Modifiez le code afin d'utiliser un conteneur STL plus adapté. Normalement, à 
 
 -- L'ensemble des terminaux reservés est un attriut privé de la classe Tower. C'est donc le seul à y avoir accès.
 
-2) En regardant le contenu de la fonction `void Aircraft::turn(Point3D direction)`, pourquoi selon-vous ne sommes-nous pas passer par une réference ?
-Pensez-vous qu'il soit possible d'éviter la copie du `Point3D` passé en paramètre ?
+2) En regardant le contenu de la fonction `void Aircraft::turn(Point3D direction)`, pourquoi selon-vous ne sommes-nous pas passer par une réference constante ?
+Pourquoi n'est-il pas possible d'éviter la copie du `Point3D` passé en paramètre ?
 
 -- Nous ne sommnes pas passé par une référence car la fonction cap_length renvoie une référence d'un Point3D qui vient d'être modifié.
 
