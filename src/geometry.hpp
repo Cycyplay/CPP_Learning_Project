@@ -185,7 +185,7 @@ template <unsigned int dimension, typename type> struct Point
         return *this;
     }
 
-    Point<dimension, type>& operator*=(const float scalar)
+    Point<dimension, type>& operator*=(const type scalar)
     {
         std::transform(values.begin(), values.end(), values.begin(),
                        [scalar](type coord) { return coord * scalar; });
@@ -206,7 +206,7 @@ template <unsigned int dimension, typename type> struct Point
         return result;
     }
 
-    Point<dimension, type> operator*(const float scalar) const
+    Point<dimension, type> operator*(const type scalar) const
     {
         Point<dimension, type> result = *this;
         result *= scalar;
