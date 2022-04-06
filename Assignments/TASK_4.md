@@ -64,7 +64,7 @@ Que se passe-t-il ?
 Comment pourriez-vous expliquer que cette erreur ne se produise que maintenant ?
 
 Quand on essaye d'instancier un Point2D avec 3 arguments, le programme ne compile plus.
-??
+La dimension étant définie sur 2, avoir 3 créer une erreur.
 
 5. Que se passe-t-il maintenant si vous essayez d'instancier un `Point3D` avec 2 arguments ?
 Utilisez un `static_assert` afin de vous assurez que personne ne puisse initialiser un `Point3D` avec seulement deux éléments.
