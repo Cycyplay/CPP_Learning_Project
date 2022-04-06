@@ -11,17 +11,50 @@ template <unsigned int dimension, typename type> struct Point
 {
     Point() = default;
 
-    Point(type x, type y) : values { x, y } {}
-    Point(type x, type y, type z) : values { x, y, z } {}
+    Point(type x, type y) : values { x, y }
+    {
+        std::cout << "ménon" << std::endl;
+        static_assert(dimension == 2, "Must be dimension 2 only");
+    }
+    Point(type x, type y, type z) : values { x, y, z }
+    {
+        static_assert(dimension == 3, "Must be dimension 3 only");
+    }
 
-    type& x() { return values.at(0); }
-    type x() const { return values.at(0); }
+    type& x()
+    {
+        static_assert(dimension > 0, "Dimension is too small for x call");
+        return values.at(0);
+    }
+    type x() const
+    {
 
-    type& y() { return values.at(1); }
-    type y() const { return values.at(1); }
+        static_assert(dimension > 0, "Dimension is too small for x call");
+        return values.at(0);
+    }
 
-    type& z() { return values.at(2); }
-    type z() const { return values.at(2); }
+    type& y()
+    {
+        static_assert(dimension > 1, "Dimension is too small for y call");
+        return values.at(1);
+    }
+    type y() const
+    {
+        static_assert(dimension > 1, "Dimension is too small for y call");
+        return values.at(1);
+    }
+
+    type& z()
+    {
+
+        static_assert(dimension > 2, "Dimension is too small for z call");
+        return values.at(2);
+    }
+    type z() const
+    {
+        static_assert(dimension > 2, "Dimension is too small for z call");
+        return values.at(2);
+    }
 
     std::array<type, dimension> values = {};
 
