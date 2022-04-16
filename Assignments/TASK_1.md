@@ -93,6 +93,8 @@ Vous lui ajouterez un constructeur dont le rôle sera d'appeler les fonctions d'
 Vous pouvez maintenant ajoutez un attribut `context_initializer` de type `ContextInitializer` dans la classe `TowerSimulation`.
 A quelle ligne faut-il définir `context_initializer` dans `TowerSimulation` pour s'assurer que le constructeur de `context_initializer` est appelé avant celui de `factory` ?
 
+Il faut que le constructeur de context_initializer soit appelé avant le constructeur de factory dans le constructeur de la tower simulation.
+
 Refactorisez le restant du code pour utiliser votre factory.
 Vous devriez du coup pouvoir supprimer les variables globales `airlines` et `aircraft_types`.
 

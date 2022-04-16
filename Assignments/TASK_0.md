@@ -74,7 +74,7 @@ Réalisez ensuite un schéma présentant comment ces différentes classes intér
 
 Quelles classes et fonctions sont impliquées dans la génération du chemin d'un avion ?
 
-La classe Tower avec get_instructions, la classe waypoint qui représente des points de contrôle par lesquels doit passer un avion.
+-- La classe Tower avec get_instructions, la classe waypoint qui représente des points de contrôle par lesquels doit passer un avion.
 
 Quel conteneur de la librairie standard a été choisi pour représenter le chemin ?
 Expliquez les intérêts de ce choix.
