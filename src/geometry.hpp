@@ -6,19 +6,23 @@
 #include <cmath>
 #include <iostream>
 #include <numeric>
+#include <type_traits>
+#include <utility>
+
+class Waypoint;
+
+template <typename...> struct typelist;
 
 template <unsigned int dimension, typename type> struct Point
 {
     Point() = default;
 
-    Point(type x, type y) : values { x, y }
+    template <typename... Args, typename = std::enable_if_t<
+                                    !std::is_same<typelist<Point>, typelist<std::decay_t<Args>...>>::value>>
+    Point(Args&&... params) : values { std::forward<Args>(params)... }
     {
-        std::cout << "ménon" << std::endl;
-        static_assert(dimension == 2, "Must be dimension 2 only");
-    }
-    Point(type x, type y, type z) : values { x, y, z }
-    {
-        static_assert(dimension == 3, "Must be dimension 3 only");
+        static_assert(dimension == sizeof...(params),
+                      "Must have same number of parameters as dimension value only");
     }
 
     type& x()

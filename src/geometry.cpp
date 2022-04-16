@@ -25,15 +25,15 @@ void test_generic_points()
     p7 *= 3.0; // ou 3.f, ou 3.0 en fonction du type de Point
 
     // TEST Point2D with 3 parameters
-    //  auto p10 = Point2D { 1, 2, 3 };
+    //  auto p10 = Point2D { 1.f, 2.f, 3.f };
     //  std::cout << p10.x() << ", " << p10.y() << ", " << p10.z() << std::endl;
 
     // TEST Point3D with 2 parameters -> must not compile
-    //  auto p11 = Point3D { 1, 2 };
+    //  auto p11 = Point3D { 1.f, 2.f };
     //  std::cout << p11.x() << ", " << p11.y() << ", " << p11.z() << std::endl;
 
     // Test Point2D z() access -> must not compile
-    // auto p12 = Point2D { 1, 2 };
+    // auto p12 = Point2D { 1.f, 2.f };
     // std::cout << p12.x() << ", " << p12.y() << ", " << p12.z() << std::endl;
 
     std::cout << "END TEST GENERIC POINTS" << std::endl;

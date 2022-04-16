@@ -88,7 +88,7 @@ void TowerSimulation::init_airport()
 {
     assert(airport == nullptr);
 
-    airport = new Airport { one_lane_airport, Point3D { 0, 0, 0 },
+    airport = new Airport { one_lane_airport, Point3D { 0.f, 0.f, 0.f },
                             new img::Image { one_lane_airport_sprite_path.get_full_path() } };
 
     GL::move_queue.emplace(airport);
