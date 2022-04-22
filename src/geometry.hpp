@@ -11,11 +11,7 @@ template <unsigned int dimension, typename type> struct Point
 {
     Point() = default;
 
-    Point(type x, type y) : values { x, y }
-    {
-        std::cout << "ménon" << std::endl;
-        static_assert(dimension == 2, "Must be dimension 2 only");
-    }
+    Point(type x, type y) : values { x, y } { static_assert(dimension == 2, "Must be dimension 2 only"); }
     Point(type x, type y, type z) : values { x, y, z }
     {
         static_assert(dimension == 3, "Must be dimension 3 only");
